@@ -104,6 +104,63 @@ class Env:
                     max_x = shape.xCordinate + shape.radius
                 if (shape.yCordinate + shape.radius) > max_y:
                     max_y = shape.yCordinate + shape.radius
+                    max_y = shape.yCordinate + shape.radius
+            
+            elif shape.name == 'quadrant-tr':
+                if min_x == None: min_x = shape.xCordinate
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate + shape.radius
+                if max_y == None: max_y = shape.yCordinate + shape.radius
+                if (shape.xCordinate) < min_x:
+                    min_x = shape.xCordinate
+                if (shape.yCordinate) < min_y:
+                    min_y = shape.yCordinate
+                if (shape.xCordinate + shape.radius) > max_x:
+                    max_x = shape.xCordinate + shape.radius
+                if (shape.yCordinate + shape.radius) > max_y:
+                    max_y = shape.yCordinate + shape.radius
+            
+            elif shape.name == 'quadrant-tl':
+                if min_x == None: min_x = shape.xCordinate - shape.radius
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate
+                if max_y == None: max_y = shape.yCordinate + shape.radius
+                if (shape.xCordinate - shape.radius) < min_x:
+                    min_x = shape.xCordinate - shape.radius
+                if (shape.yCordinate) < min_y:
+                    min_y = shape.yCordinate
+                if (shape.xCordinate) > max_x:
+                    max_x = shape.xCordinate
+                if (shape.yCordinate + shape.radius) > max_y:
+                    max_y = shape.yCordinate + shape.radius
+            
+            elif shape.name == 'quadrant-br':
+                if min_x == None: min_x = shape.xCordinate 
+                if min_y == None: min_y = shape.yCordinate - shape.radius
+                if max_x == None: max_x = shape.xCordinate + shape.radius
+                if max_y == None: max_y = shape.yCordinate
+                if (shape.xCordinate) < min_x:
+                    min_x = shape.xCordinate
+                if (shape.yCordinate - shape.radius) < min_y:
+                    min_y = shape.yCordinate - shape.radius
+                if (shape.xCordinate + shape.radius) > max_x:
+                    max_x = shape.xCordinate + shape.radius
+                if (shape.yCordinate) > max_y:
+                    max_y = shape.yCordinate
+            
+            elif shape.name == 'quadrant-bl':
+                if min_x == None: min_x = shape.xCordinate - shape.radius
+                if min_y == None: min_y = shape.yCordinate - shape.radius
+                if max_x == None: max_x = shape.xCordinate
+                if max_y == None: max_y = shape.yCordinate
+                if (shape.xCordinate - shape.radius) < min_x:
+                    min_x = shape.xCordinate - shape.radius
+                if (shape.yCordinate - shape.radius) < min_y:
+                    min_y = shape.yCordinate - shape.radius
+                if (shape.xCordinate) > max_x:
+                    max_x = shape.xCordinate
+                if (shape.yCordinate) > max_y:
+                    max_y = shape.yCordinate
 
         return ([min_x, min_y], [max_x, max_y])
     
@@ -147,6 +204,18 @@ class Env:
             
             elif shape.name == 'semicircle-r':
                 ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 270, 90))
+            
+            elif shape.name == 'quadrant-tr':
+                ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 0, 90))
+            
+            elif shape.name == 'quadrant-tl':
+                ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 90, 180))
+            
+            elif shape.name == 'quadrant-br':
+                ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 270, 360))
+            
+            elif shape.name == 'quadrant-bl':
+                ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 180, 270))
 
         centroid = self.get_centroid()
         print(min_cor, max_cor)

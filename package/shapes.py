@@ -86,3 +86,33 @@ class SemiCircle(Shape):
             return self.yCordinate + ((4*self.radius)/(3*math.pi))
         elif self.shape_type == 'b':
             return self.xCordinate - ((4*self.radius)/(3*math.pi))
+
+class Quadrant(Shape):
+
+    name = "quadrant-"
+
+    def __init__(self, xCordinate, yCordinate, radius, shape_type):
+        self.radius = radius
+        self.shape_type = shape_type
+        self.name = f"quadrant-{shape_type}"
+        super().__init__(xCordinate, yCordinate)
+
+    def __str__(self):
+        return f"<Quadrant: r={self.radius} t={self.shape_type}>"
+    
+    def area(self):
+        return (math.pi * self.radius * self.radius) / 2
+    
+    @property
+    def c_x(self):
+        if self.shape_type in ['tr', 'br']:
+            return self.xCordinate + ((4*self.radius)/(3*math.pi))
+        elif self.shape_type in ['tl', 'bl']:
+            return self.xCordinate - ((4*self.radius)/(3*math.pi))
+    
+    @property
+    def c_y(self):
+        if self.shape_type in ['tr', 'tl']:
+            return self.yCordinate + ((4*self.radius)/(3*math.pi))
+        elif self.shape_type in ['br', 'bl']:
+            return self.yCordinate - ((4*self.radius)/(3*math.pi))
