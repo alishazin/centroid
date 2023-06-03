@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
 
-import math
-
 class Env:
 
     shapes = []
