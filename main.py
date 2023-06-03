@@ -99,27 +99,38 @@ class Env:
         self.shapes.append(shapeObj)
 
     def get_min_max_cordinates(self):
-        min_x = 0
-        min_y = 0
-        max_x = 0
-        max_y = 0
+        min_x = None
+        min_y = None
+        max_x = None
+        max_y = None
 
         for shape in self.shapes:
+            print(shape.name)
 
             if shape.name == 'rectangle':
-                if (shape.xCordinate) > min_x:
+                if min_x == None: min_x = shape.xCordinate
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate + shape.length
+                if max_y == None: max_y = shape.yCordinate + shape.breadth
+                if (shape.xCordinate) < min_x:
                     min_x = shape.xCordinate
-                if (shape.yCordinate) > min_y:
+                if (shape.yCordinate) < min_y:
                     min_y = shape.yCordinate
                 if (shape.xCordinate + shape.length) > max_x:
                     max_x = shape.xCordinate + shape.length
                 if (shape.yCordinate + shape.breadth) > max_y:
                     max_y = shape.yCordinate + shape.breadth
+
+                print(min_x)
             
             elif shape.name == 'circle':
-                if (shape.xCordinate - shape.radius) > min_x:
+                if min_x == None: min_x = shape.xCordinate - shape.radius
+                if min_y == None: min_y = shape.yCordinate - shape.radius
+                if max_x == None: max_x = shape.xCordinate + shape.radius
+                if max_y == None: max_y = shape.yCordinate + shape.radius
+                if (shape.xCordinate - shape.radius) < min_x:
                     min_x = shape.xCordinate - shape.radius
-                if (shape.yCordinate - shape.radius) > min_y:
+                if (shape.yCordinate - shape.radius) < min_y:
                     min_y = shape.yCordinate - shape.radius
                 if (shape.xCordinate + shape.radius) > max_x:
                     max_x = shape.xCordinate + shape.radius
@@ -127,9 +138,13 @@ class Env:
                     max_y = shape.yCordinate + shape.radius
             
             elif shape.name == 'semicircle-t':
-                if (shape.xCordinate - shape.radius) > min_x:
+                if min_x == None: min_x = shape.xCordinate - shape.radius
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate + shape.radius
+                if max_y == None: max_y = shape.yCordinate + shape.radius
+                if (shape.xCordinate - shape.radius) < min_x:
                     min_x = shape.xCordinate - shape.radius
-                if (shape.yCordinate) > min_y:
+                if (shape.yCordinate) < min_y:
                     min_y = shape.yCordinate
                 if (shape.xCordinate + shape.radius) > max_x:
                     max_x = shape.xCordinate + shape.radius
@@ -137,19 +152,27 @@ class Env:
                     max_y = shape.yCordinate + shape.radius
             
             elif shape.name == 'semicircle-b':
-                if (shape.xCordinate - shape.radius) > min_x:
+                if min_x == None: min_x = shape.xCordinate - shape.radius
+                if min_y == None: min_y = shape.yCordinate - shape.radius
+                if max_x == None: max_x = shape.xCordinate + shape.radius
+                if max_y == None: max_y = shape.yCordinate
+                if (shape.xCordinate - shape.radius) < min_x:
                     min_x = shape.xCordinate - shape.radius
-                if (shape.yCordinate + shape.radius) > min_y:
-                    min_y = shape.yCordinate + shape.radius
+                if (shape.yCordinate - shape.radius) < min_y:
+                    min_y = shape.yCordinate - shape.radius
                 if (shape.xCordinate + shape.radius) > max_x:
                     max_x = shape.xCordinate + shape.radius
                 if (shape.yCordinate) > max_y:
                     max_y = shape.yCordinate
             
             elif shape.name == 'semicircle-l':
-                if (shape.xCordinate - shape.radius) > min_x:
+                if min_x == None: min_x = shape.xCordinate - shape.radius
+                if min_y == None: min_y = shape.yCordinate - shape.radius
+                if max_x == None: max_x = shape.xCordinate
+                if max_y == None: max_y = shape.yCordinate + shape.radius
+                if (shape.xCordinate - shape.radius) < min_x:
                     min_x = shape.xCordinate - shape.radius
-                if (shape.yCordinate - shape.radius) > min_y:
+                if (shape.yCordinate - shape.radius) < min_y:
                     min_y = shape.yCordinate - shape.radius
                 if (shape.xCordinate) > max_x:
                     max_x = shape.xCordinate
@@ -157,9 +180,13 @@ class Env:
                     max_y = shape.yCordinate + shape.radius
             
             elif shape.name == 'semicircle-r':
-                if (shape.xCordinate) > min_x:
+                if min_x == None: min_x = shape.xCordinate
+                if min_y == None: min_y = shape.yCordinate - shape.radius
+                if max_x == None: max_x = shape.xCordinate + shape.radius
+                if max_y == None: max_y = shape.yCordinate + shape.radius
+                if (shape.xCordinate) < min_x:
                     min_x = shape.xCordinate
-                if (shape.yCordinate - shape.radius) > min_y:
+                if (shape.yCordinate - shape.radius) < min_y:
                     min_y = shape.yCordinate - shape.radius
                 if (shape.xCordinate + shape.radius) > max_x:
                     max_x = shape.xCordinate + shape.radius
@@ -211,6 +238,10 @@ class Env:
                 ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 270, 90))
 
         centroid = self.get_centroid()
+        print(min_cor, max_cor)
+
+        ax.plot([min_cor[0], max_cor[0]], [centroid[1], centroid[1]], color='red', alpha=0.3)
+        ax.plot([centroid[0], centroid[0]], [min_cor[1], max_cor[1]], color='red', alpha=0.3)
 
         plt.plot(centroid[0], centroid[1], marker="o", markerfacecolor="red", markeredgecolor="yellow", label="Centroid")
         plt.legend(loc ="lower right")
@@ -230,8 +261,13 @@ def main():
     # env.add_shape(Circle(4, 5, 5))
     # env.add_shape(SemiCircle(5, 5, 5, 't'))
     # env.add_shape(SemiCircle(5, 5, 5, 'b'))
-    env.add_shape(SemiCircle(5, 5, 5, 'l'))
-    env.add_shape(SemiCircle(5, 5, 5, 'r'))
+    # env.add_shape(SemiCircle(5, 5, 5, 'l'))
+    # env.add_shape(SemiCircle(5, 5, 5, 'r'))
+    env.add_shape(Rectangle(5, 5, 5, 5))
+    # env.add_shape(SemiCircle(5, 7.5, 2.5, 'l'))
+    env.add_shape(SemiCircle(10, 7.5, 2.5, 'r'))
+    # env.add_shape(SemiCircle(7.5, 5, 2.5, 'b'))
+    env.add_shape(SemiCircle(7.5, 10, 2.5, 't'))
 
     for i in env.shapes: print(i)
 
