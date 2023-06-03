@@ -1,16 +1,25 @@
 
-from package.env import Env
-from package.shapes import Rectangle, SemiCircle, Quadrant, RightTriangle, EquilateralTriangle
+from centroid.env import Env
+from centroid.shapes import (
+    Rectangle, 
+    Circle,
+    SemiCircle, 
+    Quadrant, 
+    RightTriangle, 
+    EquilateralTriangle
+)
 
 def main():
     
     env = Env()
 
-    env.add_shape(Rectangle(0, 0, 2, 2))    
-    env.add_shape(EquilateralTriangle(1, 2, 2, 't'))    
-    env.add_shape(EquilateralTriangle(1, 0, 2, 'b'))    
-    env.add_shape(EquilateralTriangle(0, 1, 2, 'l'))    
-    env.add_shape(EquilateralTriangle(2, 1, 2, 'r'))    
+    # env.add_shape(Rectangle(0, 0, 2, 2))
+    # env.add_shape(Circle(0, 0, 2))
+    env.add_shape(SemiCircle(0, 0, 2, 't'))
+    env.add_shape(SemiCircle(0, 0, 2, 'b'))
+    # env.add_shape(Quadrant(0, 0, 2, 'bl'))
+    # env.add_shape(RightTriangle(0, 0, 2, 1, 'br'))  
+    # env.add_shape(EquilateralTriangle(0, 0, 2, 'r'))
 
     for i in env.shapes: print(i)
 
