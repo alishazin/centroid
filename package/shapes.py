@@ -147,3 +147,41 @@ class RightTriangle(Shape):
             return self.yCordinate + (self.height / 3)
         elif self.shape_type in ['br', 'bl']:
             return self.yCordinate - (self.height / 3)
+
+class EquilateralTriangle(Shape):
+
+    name = "equilateraltriangle-"
+
+    def __init__(self, xCordinate, yCordinate, side, shape_type):
+        self.side = side
+        self.shape_type = shape_type
+        self.name = f"equilateraltriangle-{shape_type}"
+        super().__init__(xCordinate, yCordinate)
+
+    def __str__(self):
+        return f"<EquilateralTriangle: s={self.side} t={self.shape_type}>"
+    
+    def area(self):
+        return (math.sqrt(3) * self.side * self.side) / 4
+    
+    @property
+    def median(self):
+        return math.sqrt((self.side**2) - ((self.side/2)**2))
+    
+    @property
+    def c_x(self):
+        if self.shape_type in ['t', 'b']:
+            return self.xCordinate
+        elif self.shape_type == 'r':
+            return self.xCordinate + ((self.median) / 3)
+        elif self.shape_type == 'l':
+            return self.xCordinate - ((self.median) / 3)
+    
+    @property
+    def c_y(self):
+        if self.shape_type in ['l', 'r']:
+            return self.yCordinate
+        elif self.shape_type == 't':
+            return self.yCordinate + ((self.median) / 3)
+        elif self.shape_type == 'b':
+            return self.yCordinate - ((self.median) / 3)

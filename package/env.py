@@ -4,6 +4,8 @@ from matplotlib.patches import Circle as MatCircle
 from matplotlib.patches import Wedge as MatWedge
 from matplotlib.patches import Polygon as MatPolygon
 
+import math
+
 class Env:
 
     shapes = []
@@ -218,6 +220,62 @@ class Env:
                     max_x = shape.xCordinate
                 if (shape.yCordinate) > max_y:
                     max_y = shape.yCordinate
+            
+            elif shape.name == 'equilateraltriangle-t':
+                if min_x == None: min_x = shape.xCordinate - (shape.side / 2)
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate + (shape.side / 2)
+                if max_y == None: max_y = shape.yCordinate + (shape.median)
+                if (shape.xCordinate - (shape.side / 2)) < min_x:
+                    min_x = shape.xCordinate - (shape.side / 2)
+                if (shape.yCordinate) < min_y:
+                    min_y = shape.yCordinate
+                if (shape.xCordinate + (shape.side / 2)) > max_x:
+                    max_x = shape.xCordinate + (shape.side / 2)
+                if (shape.yCordinate + shape.median) > max_y:
+                    max_y = shape.yCordinate + (shape.median)
+            
+            elif shape.name == 'equilateraltriangle-b':
+                if min_x == None: min_x = shape.xCordinate - (shape.side / 2)
+                if min_y == None: min_y = shape.yCordinate - shape.median
+                if max_x == None: max_x = shape.xCordinate + (shape.side / 2)
+                if max_y == None: max_y = shape.yCordinate
+                if (shape.xCordinate - (shape.side / 2)) < min_x:
+                    min_x = shape.xCordinate - (shape.side / 2)
+                if (shape.yCordinate - shape.median) < min_y:
+                    min_y =shape.yCordinate - shape.median
+                if (shape.xCordinate + (shape.side / 2)) > max_x:
+                    max_x = shape.xCordinate + (shape.side / 2)
+                if (shape.yCordinate) > max_y:
+                    max_y = shape.yCordinate
+            
+            elif shape.name == 'equilateraltriangle-l':
+                if min_x == None: min_x = shape.xCordinate - (shape.median)
+                if min_y == None: min_y = shape.yCordinate - (shape.side / 2)
+                if max_x == None: max_x = shape.xCordinate
+                if max_y == None: max_y = shape.yCordinate + (shape.side / 2)
+                if (shape.xCordinate - (shape.median)) < min_x:
+                    min_x = shape.xCordinate - (shape.median)
+                if (shape.yCordinate - (shape.side / 2)) < min_y:
+                    min_y =shape.yCordinate - (shape.side / 2)
+                if (shape.xCordinate) > max_x:
+                    max_x = shape.xCordinate
+                if (shape.yCordinate + (shape.side / 2)) > max_y:
+                    max_y = shape.yCordinate + (shape.side / 2)
+            
+            elif shape.name == 'equilateraltriangle-r':
+                if min_x == None: min_x = shape.xCordinate
+                if min_y == None: min_y = shape.yCordinate - (shape.side / 2)
+                if max_x == None: max_x = shape.xCordinate + (shape.median)
+                if max_y == None: max_y = shape.yCordinate + (shape.side / 2)
+                if (shape.xCordinate) < min_x:
+                    min_x = shape.xCordinate
+                if (shape.yCordinate - (shape.side / 2)) < min_y:
+                    min_y =shape.yCordinate - (shape.side / 2)
+                if (shape.xCordinate + (shape.median)) > max_x:
+                    max_x = shape.xCordinate + (shape.median)
+                if (shape.yCordinate + (shape.side / 2)) > max_y:
+                    max_y = shape.yCordinate + (shape.side / 2)
 
         return ([min_x, min_y], [max_x, max_y])
     
@@ -285,6 +343,18 @@ class Env:
             
             elif shape.name == 'righttriangle-bl':
                 ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate], [shape.xCordinate - shape.base, shape.yCordinate], [shape.xCordinate, shape.yCordinate - shape.height]]))
+            
+            elif shape.name == 'equilateraltriangle-t':
+                ax.add_patch(MatPolygon([[shape.xCordinate - (shape.side / 2), shape.yCordinate], [shape.xCordinate + (shape.side / 2), shape.yCordinate], [shape.xCordinate, shape.yCordinate + shape.median]]))
+            
+            elif shape.name == 'equilateraltriangle-b':
+                ax.add_patch(MatPolygon([[shape.xCordinate - (shape.side / 2), shape.yCordinate], [shape.xCordinate + (shape.side / 2), shape.yCordinate], [shape.xCordinate, shape.yCordinate - shape.median]]))
+            
+            elif shape.name == 'equilateraltriangle-l':
+                ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate - (shape.side / 2)], [shape.xCordinate, shape.yCordinate + (shape.side / 2)], [shape.xCordinate - shape.median, shape.yCordinate]]))
+            
+            elif shape.name == 'equilateraltriangle-r':
+                ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate - (shape.side / 2)], [shape.xCordinate, shape.yCordinate + (shape.side / 2)], [shape.xCordinate + shape.median, shape.yCordinate]]))
 
         centroid = self.get_centroid()
         print(min_cor, max_cor)

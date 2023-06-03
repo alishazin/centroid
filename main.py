@@ -1,28 +1,16 @@
 
 from package.env import Env
-from package.shapes import Rectangle, SemiCircle, Quadrant, RightTriangle
+from package.shapes import Rectangle, SemiCircle, Quadrant, RightTriangle, EquilateralTriangle
 
 def main():
     
     env = Env()
 
-    # env.add_shape(Rectangle(5, 5, 5, 5))
-    # env.add_shape(SemiCircle(5, 7.5, 2.5, 'l'))
-    # env.add_shape(SemiCircle(10, 7.5, 2.5, 'r'))
-    # env.add_shape(SemiCircle(7.5, 5, 2.5, 'b'))
-    # env.add_shape(SemiCircle(7.5, 10, 2.5, 't'))
-    # env.add_shape(Quadrant(0, 0, 5, 'tr'))
-    # env.add_shape(Quadrant(0, 0, 5, 'tl'))
-    # env.add_shape(Quadrant(0, 0, 5, 'br'))
-    # env.add_shape(Quadrant(0, 0, 5, 'bl'))
-    # env.add_shape(RightTriangle(2, 2, 2, 1, 'tr'))
-    # env.add_shape(RightTriangle(-2, -2, 3, 3, 'tl'))
-    # env.add_shape(RightTriangle(2, 2, 3, 3, 'br'))
-    # env.add_shape(RightTriangle(2, 2, 3, 3, 'bl'))
-    env.add_shape(RightTriangle(0, 0, 3, 3, 'tr'))
-    env.add_shape(RightTriangle(0, 0, 3, 3, 'tl'))
-    env.add_shape(RightTriangle(0, 0, 3, 3, 'br'))
-    env.add_shape(RightTriangle(0, 0, 3, 3, 'bl'))
+    env.add_shape(Rectangle(0, 0, 2, 2))    
+    env.add_shape(EquilateralTriangle(1, 2, 2, 't'))    
+    env.add_shape(EquilateralTriangle(1, 0, 2, 'b'))    
+    env.add_shape(EquilateralTriangle(0, 1, 2, 'l'))    
+    env.add_shape(EquilateralTriangle(2, 1, 2, 'r'))    
 
     for i in env.shapes: print(i)
 
