@@ -215,7 +215,6 @@ class Env:
         fig, ax = plt.subplots()
 
         min_cor, max_cor = self.get_min_max_cordinates()
-        ax.plot([min_cor[0], max_cor[0]],[min_cor[1], max_cor[1]], alpha=0)
 
         for shape in self.shapes:
 
