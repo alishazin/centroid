@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle as MatRectangle
 from matplotlib.patches import Circle as MatCircle
 from matplotlib.patches import Wedge as MatWedge
+from matplotlib.patches import Polygon as MatPolygon
 
 class Env:
 
@@ -161,6 +162,62 @@ class Env:
                     max_x = shape.xCordinate
                 if (shape.yCordinate) > max_y:
                     max_y = shape.yCordinate
+            
+            elif shape.name == 'righttriangle-tr':
+                if min_x == None: min_x = shape.xCordinate
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate + shape.base
+                if max_y == None: max_y = shape.yCordinate + shape.height
+                if (shape.xCordinate) < min_x:
+                    min_x = shape.xCordinate
+                if (shape.yCordinate) < min_y:
+                    min_y = shape.yCordinate
+                if (shape.xCordinate + shape.base) > max_x:
+                    max_x = shape.xCordinate + shape.base
+                if (shape.yCordinate + shape.height) > max_y:
+                    max_y = shape.yCordinate + shape.height
+            
+            elif shape.name == 'righttriangle-tl':
+                if min_x == None: min_x = shape.xCordinate - shape.base
+                if min_y == None: min_y = shape.yCordinate
+                if max_x == None: max_x = shape.xCordinate
+                if max_y == None: max_y = shape.yCordinate + shape.height
+                if (shape.xCordinate - shape.base) < min_x:
+                    min_x = shape.xCordinate - shape.base
+                if (shape.yCordinate) < min_y:
+                    min_y = shape.yCordinate
+                if (shape.xCordinate) > max_x:
+                    max_x = shape.xCordinate
+                if (shape.yCordinate + shape.height) > max_y:
+                    max_y = shape.yCordinate + shape.height
+            
+            elif shape.name == 'righttriangle-br':
+                if min_x == None: min_x = shape.xCordinate
+                if min_y == None: min_y = shape.yCordinate - shape.height
+                if max_x == None: max_x = shape.xCordinate + shape.base
+                if max_y == None: max_y = shape.yCordinate
+                if (shape.xCordinate) < min_x:
+                    min_x = shape.xCordinate
+                if (shape.yCordinate - shape.height) < min_y:
+                    min_y = shape.yCordinate - shape.height
+                if (shape.xCordinate + shape.base) > max_x:
+                    max_x = shape.xCordinate + shape.base
+                if (shape.yCordinate) > max_y:
+                    max_y = shape.yCordinate
+            
+            elif shape.name == 'righttriangle-bl':
+                if min_x == None: min_x = shape.xCordinate - shape.base
+                if min_y == None: min_y = shape.yCordinate - shape.height
+                if max_x == None: max_x = shape.xCordinate
+                if max_y == None: max_y = shape.yCordinate
+                if (shape.xCordinate - shape.base) < min_x:
+                    min_x = shape.xCordinate - shape.base
+                if (shape.yCordinate - shape.height) < min_y:
+                    min_y = shape.yCordinate - shape.height
+                if (shape.xCordinate) > max_x:
+                    max_x = shape.xCordinate
+                if (shape.yCordinate) > max_y:
+                    max_y = shape.yCordinate
 
         return ([min_x, min_y], [max_x, max_y])
     
@@ -216,6 +273,18 @@ class Env:
             
             elif shape.name == 'quadrant-bl':
                 ax.add_patch(MatWedge((shape.xCordinate, shape.yCordinate), shape.radius, 180, 270))
+            
+            elif shape.name == 'righttriangle-tr':
+                ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate], [shape.xCordinate + shape.base, shape.yCordinate], [shape.xCordinate, shape.yCordinate + shape.height]]))
+            
+            elif shape.name == 'righttriangle-tl':
+                ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate], [shape.xCordinate - shape.base, shape.yCordinate], [shape.xCordinate, shape.yCordinate + shape.height]]))
+            
+            elif shape.name == 'righttriangle-br':
+                ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate], [shape.xCordinate + shape.base, shape.yCordinate], [shape.xCordinate, shape.yCordinate - shape.height]]))
+            
+            elif shape.name == 'righttriangle-bl':
+                ax.add_patch(MatPolygon([[shape.xCordinate, shape.yCordinate], [shape.xCordinate - shape.base, shape.yCordinate], [shape.xCordinate, shape.yCordinate - shape.height]]))
 
         centroid = self.get_centroid()
         print(min_cor, max_cor)

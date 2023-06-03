@@ -101,7 +101,7 @@ class Quadrant(Shape):
         return f"<Quadrant: r={self.radius} t={self.shape_type}>"
     
     def area(self):
-        return (math.pi * self.radius * self.radius) / 2
+        return (math.pi * self.radius * self.radius) / 4
     
     @property
     def c_x(self):
@@ -116,3 +116,34 @@ class Quadrant(Shape):
             return self.yCordinate + ((4*self.radius)/(3*math.pi))
         elif self.shape_type in ['br', 'bl']:
             return self.yCordinate - ((4*self.radius)/(3*math.pi))
+
+class RightTriangle(Shape):
+
+    name = "righttriangle-"
+
+    def __init__(self, xCordinate, yCordinate, base, height, shape_type):
+        self.base = base
+        self.height = height
+        self.shape_type = shape_type
+        self.name = f"righttriangle-{shape_type}"
+        super().__init__(xCordinate, yCordinate)
+
+    def __str__(self):
+        return f"<RightTriangle: b={self.base} h={self.height} t={self.shape_type}>"
+    
+    def area(self):
+        return (1/2) * self.base * self.height
+    
+    @property
+    def c_x(self):
+        if self.shape_type in ['tr', 'br']:
+            return self.xCordinate + (self.base / 3)
+        elif self.shape_type in ['tl', 'bl']:
+            return self.xCordinate - (self.base / 3)
+    
+    @property
+    def c_y(self):
+        if self.shape_type in ['tr', 'tl']:
+            return self.yCordinate + (self.height / 3)
+        elif self.shape_type in ['br', 'bl']:
+            return self.yCordinate - (self.height / 3)
