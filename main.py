@@ -148,7 +148,7 @@ def add_rectangle_page():
     print("\n")
     
     xCor, yCor = get_cordinates()
-    length = input_number("Enter length: ", "length")
+    length = input_pos_number("Enter length: ", "length")
     breadth = input_pos_number("Enter breadth: ", "breadth")
 
     shape = Rectangle(xCor, yCor, length, breadth)
