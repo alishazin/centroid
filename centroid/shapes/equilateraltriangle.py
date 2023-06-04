@@ -102,21 +102,21 @@ class EquilateralTriangle(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self, color=None, edge_clr=None):
+    def get_graph_patch(self, color=None):
 
         if color:
 
             if self.shape_type == 't':
-                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate + self.median]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate + self.median]], color=color)
             
             elif self.shape_type == 'b':
-                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate - self.median]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate - self.median]], color=color, alpha=0.6)
             
             elif self.shape_type == 'l':
-                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate - self.median, self.yCordinate]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate - self.median, self.yCordinate]], color=color, alpha=0.6)
             
             elif self.shape_type == 'r':
-                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate + self.median, self.yCordinate]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate + self.median, self.yCordinate]], color=color, alpha=0.6)
         
         else:
 

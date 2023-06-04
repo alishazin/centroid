@@ -237,6 +237,10 @@ def add_equilateraltriangle_page():
 def view_shapes():
     print("\n")
 
+    print("Before you calculate the centroid:")
+    print("1. Make sure that there are no gaps between the shapes.")
+    print("2. Make sure that there is no overlapping of shapes.\n")
+
     if (len(env.shapes) > 0):
         for i in env.shapes: print(i)
         env.view_shapes()

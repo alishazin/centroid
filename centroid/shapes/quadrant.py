@@ -94,21 +94,21 @@ class Quadrant(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self, color=None, edge_clr=None):
+    def get_graph_patch(self, color=None):
         
         if color:
 
             if self.shape_type == 'tr':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 90, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 90, color=color, alpha=0.6)
             
             elif self.shape_type == 'tl':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 180, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 180, color=color, alpha=0.6)
             
             elif self.shape_type == 'br':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 360, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 360, color=color, alpha=0.6)
             
             elif self.shape_type == 'bl':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 270, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 270, color=color, alpha=0.6)
  
         else:
 

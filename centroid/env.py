@@ -58,7 +58,6 @@ class Env:
 
         count = 0
         colors = ['#C46210', '#2E5894', '#9C2542', '#A57164', '#58427C', '#4A646C', '#85754E', '#319177', '#8D4E85'] 
-        edge_clr = 'k'
 
         fig, ax = plt.subplots()
 
@@ -66,7 +65,7 @@ class Env:
 
 
         for shape in self.shapes:
-            ax.add_patch(shape.get_graph_patch(color=colors[count], edge_clr=edge_clr))
+            ax.add_patch(shape.get_graph_patch(color=colors[count]))
             count += 1
             count = count % len(colors)
 

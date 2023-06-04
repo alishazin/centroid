@@ -99,21 +99,21 @@ class SemiCircle(Shape):
 
         return (min_x, min_y, max_x, max_y)
 
-    def get_graph_patch(self, color=None, edge_clr=None):
+    def get_graph_patch(self, color=None):
 
         if color:
 
             if self.shape_type == 't':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 180, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 180, color=color, alpha=0.6)
             
             elif self.shape_type == 'b':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 360, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 360, color=color, alpha=0.6)
             
             elif self.shape_type == 'l':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 270, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 270, color=color, alpha=0.6)
             
             elif self.shape_type == 'r':
-                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 90, facecolor=color, edgecolor=edge_clr, linewidth=3)
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 90, color=color, alpha=0.6)
             
         else:
 

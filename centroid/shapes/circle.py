@@ -44,9 +44,8 @@ class Circle(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self, color=None, edge_clr=None):
+    def get_graph_patch(self, color=None):
         if color:
-            print(color, edge_clr)
-            return MatCircle((self.xCordinate, self.yCordinate), self.radius, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            return MatCircle((self.xCordinate, self.yCordinate), self.radius, color=color, alpha=0.6)
         else:
             return MatCircle((self.xCordinate, self.yCordinate), self.radius)
