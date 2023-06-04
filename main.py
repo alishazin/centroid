@@ -65,8 +65,8 @@ def input_pos_number(text, field):
             print(f"{field.capitalize()} should a number")
             continue
         else:
-            if float(num) < 0:
-                print(f"{field.capitalize()} should a positive number")
+            if float(num) <= 0:
+                print(f"{field.capitalize()} should a non-zero positive number")
                 continue
         break
 
