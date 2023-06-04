@@ -57,7 +57,7 @@ class Env:
     def view_shapes(self):
 
         count = 0
-        colors = ['b', 'g', 'm', 'r', 'c', 'y', 'w'] 
+        colors = ['#C46210', '#2E5894', '#9C2542', '#A57164', '#58427C', '#4A646C', '#85754E', '#319177', '#8D4E85'] 
         edge_clr = 'k'
 
         fig, ax = plt.subplots()

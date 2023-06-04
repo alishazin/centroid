@@ -264,28 +264,31 @@ def remove_shape_page():
             print(f"{count}. {i}")
             count += 1
 
-        choice = input("Enter the shape index to remove: ")
+        choice = input("Enter the shape index to remove (enter e to exit): ")
+        
+        if choice.lower() == 'e':
+            home_page()
+        else:
+            try:
+                if int(choice) <= 0:
+                    print("Invalid choice")
+                    pause()
+                    remove_shape_page()
 
-        try:
-            if int(choice) <= 0:
+                elif env.shapes[int(choice) - 1] is None:
+                    print("Invalid choice")
+                    pause()
+                    remove_shape_page()
+                else:
+                    print(f"Removed {env.shapes[int(choice) - 1]}")
+                    env.shapes.pop(int(choice) - 1)
+                    pause()
+                    home_page()
+
+            except:
                 print("Invalid choice")
                 pause()
                 remove_shape_page()
-
-            elif env.shapes[int(choice) - 1] is None:
-                print("Invalid choice")
-                pause()
-                remove_shape_page()
-            else:
-                print(f"Removed {env.shapes[int(choice) - 1]}")
-                env.shapes.pop(int(choice) - 1)
-                pause()
-                home_page()
-
-        except:
-            print("Invalid choice")
-            pause()
-            remove_shape_page()
 
 
 def remove_all_shapes():
