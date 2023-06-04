@@ -14,7 +14,7 @@ class RightTriangle(Shape):
         super().__init__(xCordinate, yCordinate)
 
     def __str__(self):
-        return f"<RightTriangle: b={self.base} h={self.height} t={self.shape_type}>"
+        return f"<RightTriangle: x={self.xCordinate} y={self.yCordinate} base={self.base} height={self.height} type={self.shape_type}>"
     
     @property
     def c_x(self):
@@ -93,16 +93,32 @@ class RightTriangle(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self):
+    def get_graph_patch(self, color=None, edge_clr=None):
+
+        if color:
         
-        if self.shape_type == 'tr':
-            return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate + self.base, self.yCordinate], [self.xCordinate, self.yCordinate + self.height]])
+            if self.shape_type == 'tr':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate + self.base, self.yCordinate], [self.xCordinate, self.yCordinate + self.height]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'tl':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate - self.base, self.yCordinate], [self.xCordinate, self.yCordinate + self.height]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'br':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate + self.base, self.yCordinate], [self.xCordinate, self.yCordinate - self.height]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'bl':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate - self.base, self.yCordinate], [self.xCordinate, self.yCordinate - self.height]], facecolor=color, edgecolor=edge_clr, linewidth=3)
         
-        elif self.shape_type == 'tl':
-            return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate - self.base, self.yCordinate], [self.xCordinate, self.yCordinate + self.height]])
-        
-        elif self.shape_type == 'br':
-            return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate + self.base, self.yCordinate], [self.xCordinate, self.yCordinate - self.height]])
-        
-        elif self.shape_type == 'bl':
-            return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate - self.base, self.yCordinate], [self.xCordinate, self.yCordinate - self.height]])
+        else:
+
+            if self.shape_type == 'tr':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate + self.base, self.yCordinate], [self.xCordinate, self.yCordinate + self.height]])
+            
+            elif self.shape_type == 'tl':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate - self.base, self.yCordinate], [self.xCordinate, self.yCordinate + self.height]])
+            
+            elif self.shape_type == 'br':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate + self.base, self.yCordinate], [self.xCordinate, self.yCordinate - self.height]])
+            
+            elif self.shape_type == 'bl':
+                return MatPolygon([[self.xCordinate, self.yCordinate], [self.xCordinate - self.base, self.yCordinate], [self.xCordinate, self.yCordinate - self.height]])

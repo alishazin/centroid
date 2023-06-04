@@ -15,7 +15,7 @@ class EquilateralTriangle(Shape):
         super().__init__(xCordinate, yCordinate)
 
     def __str__(self):
-        return f"<EquilateralTriangle: s={self.side} t={self.shape_type}>"
+        return f"<EquilateralTriangle: x={self.xCordinate} y={self.yCordinate} side={self.side} type={self.shape_type}>"
     
     @property
     def median(self):
@@ -102,16 +102,32 @@ class EquilateralTriangle(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self):
+    def get_graph_patch(self, color=None, edge_clr=None):
 
-        if self.shape_type == 't':
-            return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate + self.median]])
+        if color:
+
+            if self.shape_type == 't':
+                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate + self.median]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'b':
+                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate - self.median]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'l':
+                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate - self.median, self.yCordinate]], facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'r':
+                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate + self.median, self.yCordinate]], facecolor=color, edgecolor=edge_clr, linewidth=3)
         
-        elif self.shape_type == 'b':
-            return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate - self.median]])
-        
-        elif self.shape_type == 'l':
-            return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate - self.median, self.yCordinate]])
-        
-        elif self.shape_type == 'r':
-            return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate + self.median, self.yCordinate]])
+        else:
+
+            if self.shape_type == 't':
+                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate + self.median]])
+            
+            elif self.shape_type == 'b':
+                return MatPolygon([[self.xCordinate - (self.side / 2), self.yCordinate], [self.xCordinate + (self.side / 2), self.yCordinate], [self.xCordinate, self.yCordinate - self.median]])
+            
+            elif self.shape_type == 'l':
+                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate - self.median, self.yCordinate]])
+            
+            elif self.shape_type == 'r':
+                return MatPolygon([[self.xCordinate, self.yCordinate - (self.side / 2)], [self.xCordinate, self.yCordinate + (self.side / 2)], [self.xCordinate + self.median, self.yCordinate]])

@@ -14,7 +14,7 @@ class Circle(Shape):
         super().__init__(xCordinate, yCordinate)
 
     def __str__(self):
-        return f"<Circle: r={self.radius}>"
+        return f"<Circle: x={self.xCordinate} y={self.yCordinate} radius={self.radius}>"
     
     @property
     def c_x(self):
@@ -44,5 +44,9 @@ class Circle(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self):
-        return MatCircle((self.xCordinate, self.yCordinate), self.radius)
+    def get_graph_patch(self, color=None, edge_clr=None):
+        if color:
+            print(color, edge_clr)
+            return MatCircle((self.xCordinate, self.yCordinate), self.radius, facecolor=color, edgecolor=edge_clr, linewidth=3)
+        else:
+            return MatCircle((self.xCordinate, self.yCordinate), self.radius)

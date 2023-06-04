@@ -15,7 +15,7 @@ class Quadrant(Shape):
         super().__init__(xCordinate, yCordinate)
 
     def __str__(self):
-        return f"<Quadrant: r={self.radius} t={self.shape_type}>"
+        return f"<Quadrant: x={self.xCordinate} y={self.yCordinate} r={self.radius} type={self.shape_type}>"
     
     @property
     def c_x(self):
@@ -94,16 +94,32 @@ class Quadrant(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self):
+    def get_graph_patch(self, color=None, edge_clr=None):
         
-        if self.shape_type == 'tr':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 90)
-        
-        elif self.shape_type == 'tl':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 180)
-        
-        elif self.shape_type == 'br':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 360)
-        
-        elif self.shape_type == 'bl':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 270)
+        if color:
+
+            if self.shape_type == 'tr':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 90, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'tl':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 180, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'br':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 360, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'bl':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 270, facecolor=color, edgecolor=edge_clr, linewidth=3)
+ 
+        else:
+
+            if self.shape_type == 'tr':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 90)
+            
+            elif self.shape_type == 'tl':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 180)
+            
+            elif self.shape_type == 'br':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 360)
+            
+            elif self.shape_type == 'bl':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 270)

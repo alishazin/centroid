@@ -13,7 +13,7 @@ class Rectangle(Shape):
         super().__init__(xCordinate, yCordinate)
 
     def __str__(self):
-        return f"<Rectangle: l={self.length} b={self.breadth}>"
+        return f"<Rectangle: x={self.xCordinate} y={self.yCordinate} length={self.length} breadth={self.breadth}>"
     
     @property
     def c_x(self):
@@ -43,5 +43,8 @@ class Rectangle(Shape):
 
         return (min_x, min_y, max_x, max_y)
     
-    def get_graph_patch(self):
-        return MatRectangle((self.xCordinate, self.yCordinate), self.length, self.breadth)
+    def get_graph_patch(self, color=None, edge_clr=None):
+        if color:
+            return MatRectangle((self.xCordinate, self.yCordinate), self.length, self.breadth, facecolor=color, edgecolor=edge_clr, linewidth=3)
+        else:
+            return MatRectangle((self.xCordinate, self.yCordinate), self.length, self.breadth)

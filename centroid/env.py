@@ -51,6 +51,28 @@ class Env:
         plt.plot(centroid[0], centroid[1], marker="o", markerfacecolor="red", markeredgecolor="yellow", label="Centroid")
         plt.legend(loc ="lower right")
 
-        print(centroid)
+
+        plt.show()
+    
+    def view_shapes(self):
+
+        count = 0
+        colors = ['b', 'g', 'm', 'r', 'c', 'y', 'w'] 
+        edge_clr = 'k'
+
+        fig, ax = plt.subplots()
+
+        min_cor, max_cor = self.get_min_max_cordinates()
+
+
+        for shape in self.shapes:
+            ax.add_patch(shape.get_graph_patch(color=colors[count], edge_clr=edge_clr))
+            count += 1
+            count = count % len(colors)
+
+        centroid = self.get_centroid()
+
+        ax.plot([min_cor[0], max_cor[0]], [centroid[1], centroid[1]], alpha=0)
+        ax.plot([centroid[0], centroid[0]], [min_cor[1], max_cor[1]], alpha=0)
 
         plt.show()

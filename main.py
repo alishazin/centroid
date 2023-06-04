@@ -10,6 +10,9 @@ from centroid.shapes import (
 )
 
 
+def pause():
+    input("Press enter to continue: ")
+
 def get_one_lettered_shape_type():
     
     while True:
@@ -99,12 +102,12 @@ def home_page():
     elif choice == '4':
         remove_all_shapes()
     elif choice == '5':
-        env.plot()
-        home_page()
-    elif choice == '5':
+        calculate_centroid()
+    elif choice == '6':
         return None
     else:
         print("Invalid choice")
+        pause()
         home_page()
 
 
@@ -137,6 +140,7 @@ def add_shape_page():
         home_page()
     else:
         print("Invalid choice")
+        pause()
         add_shape_page()
 
 
@@ -149,8 +153,9 @@ def add_rectangle_page():
 
     shape = Rectangle(xCor, yCor, length, breadth)
     env.add_shape(shape)
-    print(f"Shape Added: {shape}")
+    print(f"\nShape Added: {shape}")
 
+    pause()
     add_shape_page()
 
 
@@ -162,8 +167,9 @@ def add_circle_page():
 
     shape = Circle(xCor, yCor, radius)
     env.add_shape(shape)
-    print(f"Shape Added: {shape}")
+    print(f"\nShape Added: {shape}")
 
+    pause()
     add_shape_page()
 
 
@@ -176,8 +182,9 @@ def add_semicircle_page():
 
     shape = SemiCircle(xCor, yCor, radius, shape_type)
     env.add_shape(shape)
-    print(f"Shape Added: {shape}")
+    print(f"\nShape Added: {shape}")
 
+    pause()
     add_shape_page()
 
 
@@ -190,8 +197,9 @@ def add_quadrant_page():
 
     shape = Quadrant(xCor, yCor, radius, shape_type)
     env.add_shape(shape)
-    print(f"Shape Added: {shape}")
+    print(f"\nShape Added: {shape}")
 
+    pause()
     add_shape_page()
 
 
@@ -205,8 +213,9 @@ def add_righttriangle_page():
 
     shape = RightTriangle(xCor, yCor, base, height, shape_type)
     env.add_shape(shape)
-    print(f"Shape Added: {shape}")
+    print(f"\nShape Added: {shape}")
 
+    pause()
     add_shape_page()
 
 
@@ -219,21 +228,98 @@ def add_equilateraltriangle_page():
 
     shape = EquilateralTriangle(xCor, yCor, side, shape_type)
     env.add_shape(shape)
-    print(f"Shape Added: {shape}")
+    print(f"\nShape Added: {shape}")
 
+    pause()
     add_shape_page()
 
 
 def view_shapes():
-    pass
+    print("\n")
+
+    if (len(env.shapes) > 0):
+        for i in env.shapes: print(i)
+        env.view_shapes()
+    else:
+        print("No shapes added yet!")
+
+
+    pause()
+    home_page()
 
 
 def remove_shape_page():
-    pass
+    print("\n")
+
+    if (len(env.shapes) == 0):
+
+        print("No shapes added yet!")
+        pause()
+        home_page()
+
+    else:
+
+        count = 1
+        for i in env.shapes:
+            print(f"{count}. {i}")
+            count += 1
+
+        choice = input("Enter the shape index to remove: ")
+
+        try:
+            if int(choice) <= 0:
+                print("Invalid choice")
+                pause()
+                remove_shape_page()
+
+            elif env.shapes[int(choice) - 1] is None:
+                print("Invalid choice")
+                pause()
+                remove_shape_page()
+            else:
+                print(f"Removed {env.shapes[int(choice) - 1]}")
+                env.shapes.pop(int(choice) - 1)
+                pause()
+                home_page()
+
+        except:
+            print("Invalid choice")
+            pause()
+            remove_shape_page()
 
 
 def remove_all_shapes():
-    pass
+    print("\n")
+
+    if (len(env.shapes) == 0):
+
+        print("No shapes added yet!")
+        pause()
+        home_page()
+
+    else:
+
+        env.shapes = []
+        print("Removed all shapes.")
+        pause()
+        home_page()
+
+
+def calculate_centroid():
+    print("\n")
+
+    if (len(env.shapes) == 0):
+
+        print("No shapes added yet!")
+        pause()
+        home_page()
+
+    else:
+
+        print(f"Centroid: {env.get_centroid()}")
+        env.plot()
+        home_page()
+
 
 
 env = None

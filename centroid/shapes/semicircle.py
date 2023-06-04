@@ -15,7 +15,7 @@ class SemiCircle(Shape):
         super().__init__(xCordinate, yCordinate)
 
     def __str__(self):
-        return f"<Semcircle: r={self.radius} t={self.shape_type}>"
+        return f"<Semicircle: x={self.xCordinate} y={self.yCordinate} radius={self.radius} type={self.shape_type}>"
     
     @property
     def c_x(self):
@@ -33,7 +33,7 @@ class SemiCircle(Shape):
         elif self.shape_type == 't':
             return self.yCordinate + ((4*self.radius)/(3*math.pi))
         elif self.shape_type == 'b':
-            return self.xCordinate - ((4*self.radius)/(3*math.pi))
+            return self.yCordinate - ((4*self.radius)/(3*math.pi))
     
     def area(self):
         return (math.pi * self.radius * self.radius) / 2
@@ -99,16 +99,32 @@ class SemiCircle(Shape):
 
         return (min_x, min_y, max_x, max_y)
 
-    def get_graph_patch(self):
+    def get_graph_patch(self, color=None, edge_clr=None):
 
-        if self.shape_type == 't':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 180)
-        
-        elif self.shape_type == 'b':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 360)
-        
-        elif self.shape_type == 'l':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 270)
-        
-        elif self.shape_type == 'r':
-            return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 90)
+        if color:
+
+            if self.shape_type == 't':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 180, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'b':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 360, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'l':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 270, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+            elif self.shape_type == 'r':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 90, facecolor=color, edgecolor=edge_clr, linewidth=3)
+            
+        else:
+
+            if self.shape_type == 't':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 0, 180)
+            
+            elif self.shape_type == 'b':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 180, 360)
+            
+            elif self.shape_type == 'l':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 90, 270)
+            
+            elif self.shape_type == 'r':
+                return MatWedge((self.xCordinate, self.yCordinate), self.radius, 270, 90)
