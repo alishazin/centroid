@@ -1,2 +1,2 @@
 test.py
-centroid/__pycache__/
+*.pyc
