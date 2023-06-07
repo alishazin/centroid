@@ -89,7 +89,7 @@ def home_page():
     print("2. View Shapes")
     print("3. Remove Shape")
     print("4. Remove All Shapes")
-    print("5. Calculate Centroid")
+    print("5. Calculate Centroid and Moment of Inertia")
     print("6. Exit")
     choice = input("Enter Choice: ").strip()
 
@@ -324,6 +324,14 @@ def calculate_centroid():
     else:
 
         print(f"Centroid: {env.get_centroid()}")
+
+        mom_inertia = env.get_moment_of_inertia()
+
+        if (mom_inertia): 
+            print(f"Moment Of Inertia: {mom_inertia}")
+        else:
+            print("Moment of inertia of a shape including shapes other than rectangle is not possible.")
+        
         env.plot()
         home_page()
 

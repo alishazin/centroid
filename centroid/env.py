@@ -33,6 +33,30 @@ class Env:
         y /= sum_area
 
         return (x, y)
+    
+    def get_moment_of_inertia(self):
+
+        for i in self.shapes:
+            if i.name != "rectangle":
+                return None
+        
+        c_x, c_y = self.get_centroid()
+        
+        Ixx = 0
+        Iyy = 0
+        diff_x = 0
+        diff_y = 0
+
+        for shape in self.shapes:
+            Ixx += (shape.length * (shape.breadth**3)) / 12
+            Iyy += (shape.breadth * (shape.length**3)) / 12
+            diff_x += (shape.area() * (shape.c_x - c_x)**2)
+            diff_y += (shape.area() * (shape.c_y - c_y)**2)
+
+        IXX = Ixx + diff_y
+        IYY = Iyy + diff_x
+
+        return (IXX, IYY)
 
     def plot(self):
 
@@ -50,7 +74,6 @@ class Env:
 
         plt.plot(centroid[0], centroid[1], marker="o", markerfacecolor="red", markeredgecolor="yellow", label="Centroid")
         plt.legend(loc ="lower right")
-
 
         plt.show()
     
